@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hogify — Domótica y casas inteligentes en Río Gallegos</title>
+<meta name="description" content="Hogify convierte tu casa en inteligente en Río Gallegos. Climatización, iluminación, seguridad, accesos y más, controlado desde una sola app. Asesoramiento, instalación e integración profesional." />
+<meta name="keywords" content="domótica Río Gallegos, casa inteligente Río Gallegos, automatización del hogar, smart home Santa Cruz, climatización inteligente" />
+<meta name="theme-color" content="#0a1230" />
+
+<!-- Open Graph -->
+<meta property="og:title" content="Hogify — Domótica en Río Gallegos" />
+<meta property="og:description" content="Convertí tu casa en inteligente. Climatización, seguridad y control total desde una sola app." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="logo-png.png" />
+
+<link rel="icon" type="image/png" href="logo-png.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet" />
+
+<!-- LocalBusiness Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Hogify",
+  "description": "Domótica y casas inteligentes en Río Gallegos. Instalación e integración de sistemas inteligentes para el hogar.",
+  "areaServed": { "@type": "City", "name": "Río Gallegos" },
+  "address": { "@type": "PostalAddress", "addressLocality": "Río Gallegos", "addressRegion": "Santa Cruz", "addressCountry": "AR" },
+  "telephone": "+5492966532800",
+  "image": "logo-png.png",
+  "priceRange": "$$",
+  "slogan": "Si se puede conectar, lo hacemos inteligente."
+}
+</script>
+
+<style>
+:root{
+  --navy-900:#070d22;
+  --navy-800:#0a1230;
+  --navy-700:#0e1840;
+  --navy-600:#142255;
+  --cyan:#00BFFF;
+  --cyan-bright:#1FB6FF;
+  --cyan-soft:#7fd9ff;
+  --blue-deep:#1B4F9C;
+  --white:#ffffff;
+  --ink:#e7eefc;
+  --muted:#9fb0d4;
+  --muted-2:#6f80a8;
+  --line:rgba(127,217,255,.14);
+  --glass:rgba(255,255,255,.04);
+  --glass-2:rgba(255,255,255,.06);
+  --radius:20px;
+  --wa:#25D366;
+  --max:1180px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Sora',system-ui,-apple-system,sans-serif;
+  background:var(--navy-800);
+  color:var(--ink);
+  line-height:1.6;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+section{position:relative}
+
+/* ---------- Animated background ---------- */
+.bg-fx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bg-fx::before{
+  content:"";position:absolute;inset:-20%;
+  background:
+    radial-gradient(50% 40% at 15% 10%, rgba(0,191,255,.16), transparent 60%),
+    radial-gradient(45% 45% at 90% 20%, rgba(27,79,156,.28), transparent 60%),
+    radial-gradient(60% 50% at 70% 90%, rgba(0,191,255,.10), transparent 65%);
+  animation:floatbg 18s ease-in-out infinite alternate;
+}
+.bg-fx .grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:54px 54px;
+  mask-image:radial-gradient(circle at 50% 30%, #000 0%, transparent 75%);
+  opacity:.5;
+}
+@keyframes floatbg{0%{transform:translate3d(-2%,-1%,0) scale(1.05)}100%{transform:translate3d(2%,2%,0) scale(1.12)}}
+
+.wrap{max-width:var(--max);margin:0 auto;padding:0 22px;position:relative;z-index:2}
+
+/* ---------- Nav ---------- */
+header.nav{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  transition:background .35s ease, backdrop-filter .35s ease, border-color .35s ease, padding .35s ease;
+  border-bottom:1px solid transparent;padding:14px 0;
+}
+header.nav.scrolled{
+  background:rgba(8,14,36,.72);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+  padding:8px 0;
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand img{height:46px;width:auto;filter:drop-shadow(0 0 14px rgba(0,191,255,.35));transition:height .35s ease}
+header.nav.scrolled .brand img{height:38px}
+.nav-links{display:flex;gap:30px;align-items:center}
+.nav-links a{font-size:.86rem;font-weight:500;color:var(--muted);letter-spacing:.04em;position:relative;transition:color .2s}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;height:2px;width:0;background:linear-gradient(90deg,var(--cyan),var(--cyan-bright));transition:width .25s ease;border-radius:2px}
+.nav-links a:hover{color:var(--white)}
+.nav-links a:hover::after{width:100%}
+
+.btn{
+  display:inline-flex;align-items:center;gap:9px;cursor:pointer;border:0;
+  font-family:inherit;font-weight:600;font-size:.92rem;
+  padding:13px 22px;border-radius:999px;transition:transform .2s ease, box-shadow .25s ease, filter .2s;
+}
+.btn svg{width:18px;height:18px}
+.btn-primary{
+  color:#04122a;background:linear-gradient(135deg,var(--cyan-bright),var(--cyan));
+  box-shadow:0 8px 28px rgba(0,191,255,.32), inset 0 0 0 1px rgba(255,255,255,.25);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(0,191,255,.5)}
+.btn-ghost{color:var(--ink);background:var(--glass-2);border:1px solid var(--line)}
+.btn-ghost:hover{transform:translateY(-2px);border-color:var(--cyan);color:#fff}
+.btn-wa{color:#fff;background:linear-gradient(135deg,#2bd96f,#179e4b);box-shadow:0 8px 26px rgba(37,211,102,.32)}
+.btn-wa:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(37,211,102,.5)}
+.nav .btn{padding:11px 18px;font-size:.85rem}
+.menu-toggle{display:none;background:none;border:0;color:#fff;cursor:pointer;padding:6px}
+.menu-toggle svg{width:28px;height:28px}
+
+/* ---------- Hero ---------- */
+.hero{min-height:100vh;display:flex;align-items:center;padding:120px 0 70px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.78rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan-soft);
+  background:var(--glass);border:1px solid var(--line);padding:8px 15px;border-radius:999px;margin-bottom:24px}
+.eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+
+h1{font-size:clamp(2.5rem,5.4vw,4.1rem);line-height:1.04;font-weight:800;letter-spacing:-.02em;margin-bottom:22px}
+.grad{background:linear-gradient(115deg,var(--cyan-bright),var(--cyan-soft) 55%,var(--blue-deep));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hl{position:relative;white-space:nowrap;color:#fff}
+.hl::after{content:"";position:absolute;left:-4px;right:-4px;bottom:.08em;height:.42em;z-index:-1;
+  background:linear-gradient(90deg,rgba(0,191,255,.0),rgba(0,191,255,.45),rgba(0,191,255,.0));
+  border-radius:6px;transform:scaleX(0);transform-origin:left;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.hl.lit::after{transform:scaleX(1)}
+.lead{font-size:clamp(1.02rem,1.5vw,1.18rem);color:var(--muted);max-width:46ch;margin-bottom:34px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.hero-trust{margin-top:30px;display:flex;gap:26px;flex-wrap:wrap;color:var(--muted-2);font-size:.82rem}
+.hero-trust span{display:flex;align-items:center;gap:8px}
+.hero-trust svg{width:16px;height:16px;color:var(--cyan)}
+
+/* hero visual : floating device + cards */
+.hero-visual{position:relative;min-height:440px;display:flex;align-items:center;justify-content:center}
+.orb{position:absolute;top:50%;left:50%;width:340px;height:340px;margin:-170px;border-radius:50%;
+  background:radial-gradient(circle at 50% 50%,rgba(0,191,255,.45),rgba(27,79,156,.12) 58%,transparent 72%);
+  filter:blur(6px);animation:breathe 6s ease-in-out infinite;z-index:0}
+@keyframes breathe{0%,100%{transform:scale(1);opacity:.8}50%{transform:scale(1.08);opacity:1}}
+.hero-card{position:absolute;background:var(--glass-2);border:1px solid var(--line);border-radius:16px;padding:14px 16px;backdrop-filter:blur(8px);
+  box-shadow:0 18px 50px rgba(0,0,0,.4);display:flex;align-items:center;gap:11px;font-size:.84rem;font-weight:500}
+.hero-card .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:rgba(0,191,255,.14);color:var(--cyan)}
+.hero-card .ic svg{width:18px;height:18px}
+.hero-card small{display:block;color:var(--muted-2);font-size:.72rem;font-weight:400}
+.hc1{top:8%;left:-2%;animation:floaty 5s ease-in-out infinite}
+.hc2{top:42%;right:-6%;animation:floaty 6s ease-in-out .8s infinite}
+.hc3{bottom:6%;left:8%;animation:floaty 5.5s ease-in-out .4s infinite}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+/* anillos decorativos */
+.hero-ring{position:absolute;top:50%;left:50%;width:320px;height:320px;margin:-160px;border-radius:50%;
+  border:1px dashed rgba(127,217,255,.3);animation:spin 40s linear infinite}
+.hero-ring2.mid{position:absolute;top:50%;left:50%;width:224px;height:224px;margin:-112px;border-radius:50%;
+  border:1px solid rgba(127,217,255,.16)}
+/* logo central fijo */
+.hero-core{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:grid;place-items:center;z-index:3}
+.hero-logo-emblem{width:150px;filter:drop-shadow(0 0 30px rgba(0,191,255,.5))}
+
+/* órbita de íconos girando alrededor del logo */
+.orbit{position:absolute;top:50%;left:50%;width:0;height:0;--r:160px;animation:spin 26s linear infinite;z-index:2}
+.node{position:absolute;top:0;left:0;width:50px;height:50px;margin:-25px;
+  transform:rotate(var(--a)) translate(0,calc(-1 * var(--r))) rotate(calc(-1 * var(--a)))}
+.node-ic{width:100%;height:100%;border-radius:50%;display:grid;place-items:center;color:var(--cyan);
+  background:rgba(255,255,255,.05);border:1px solid var(--line);backdrop-filter:blur(8px);
+  box-shadow:0 8px 22px rgba(0,0,0,.4),0 0 18px rgba(0,191,255,.28);
+  animation:spin-rev 26s linear infinite}
+.node-ic svg{width:22px;height:22px}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes spin-rev{to{transform:rotate(-360deg)}}
+
+/* ---------- Section heading ---------- */
+.sec{padding:96px 0}
+.sec-head{text-align:center;max-width:720px;margin:0 auto 56px}
+.sec-tag{font-size:.78rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan)}
+.sec-head h2{font-size:clamp(2rem,4vw,2.9rem);font-weight:800;letter-spacing:-.02em;margin:12px 0 14px;line-height:1.08}
+.sec-head p{color:var(--muted);font-size:1.05rem}
+
+/* ---------- Simulator ---------- */
+.sim{background:linear-gradient(180deg,transparent,rgba(7,13,34,.65) 30%,rgba(7,13,34,.65) 70%,transparent)}
+.sim-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:46px;align-items:center}
+.room{position:relative;border-radius:24px;overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3.1;
+  box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.room img{width:100%;height:100%;object-fit:cover;transition:opacity .5s ease}
+.room img.swapping{opacity:.25}
+.room .tint{position:absolute;inset:0;transition:background .8s ease, opacity .8s ease;opacity:.2;pointer-events:none}
+.room::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,13,34,.15),rgba(7,13,34,.55));pointer-events:none}
+.room .pills{position:absolute;top:16px;left:16px;display:flex;gap:10px;flex-wrap:wrap;z-index:2}
+.room .pill{background:rgba(8,14,36,.6);border:1px solid var(--line);backdrop-filter:blur(8px);padding:7px 13px;border-radius:999px;
+  font-size:.74rem;font-weight:600;letter-spacing:.06em;font-family:'Sora',monospace;color:var(--cyan-soft)}
+.room .scene-label{position:absolute;bottom:16px;left:16px;font-weight:700;font-size:1.05rem;text-shadow:0 2px 18px rgba(0,0,0,.7);z-index:2}
+
+/* phone */
+.phone{width:300px;max-width:88vw;margin:0 auto;border-radius:42px;background:linear-gradient(180deg,#0c1742,#0a1030);
+  border:8px solid #050a1f;box-shadow:0 30px 70px rgba(0,0,0,.6),inset 0 0 0 1px rgba(127,217,255,.12);
+  padding:22px 18px 24px;position:relative}
+.phone .notch{width:96px;height:26px;background:#050a1f;border-radius:0 0 16px 16px;position:absolute;top:0;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;justify-content:center}
+.phone .notch .led{width:7px;height:7px;border-radius:50%;background:#2bd96f;box-shadow:0 0 8px #2bd96f}
+.ph-head{margin-top:14px;display:flex;align-items:center;justify-content:space-between}
+.ph-head h4{font-size:1.15rem;font-weight:700}
+.ph-head small{color:var(--muted-2);font-size:.74rem}
+.ph-head .status{display:flex;align-items:center;gap:7px;font-size:.72rem;color:var(--cyan-soft)}
+.ph-head .status .d{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
+
+.dial-card{margin:16px 0;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:20px;padding:18px;text-align:center}
+.dial-card .lbl{font-size:.66rem;letter-spacing:.16em;color:var(--muted-2);font-weight:600}
+.dial{position:relative;width:150px;height:150px;margin:8px auto 4px}
+.dial svg{transform:rotate(-90deg);width:100%;height:100%}
+.dial .track{fill:none;stroke:rgba(127,217,255,.12);stroke-width:11}
+.dial .prog{fill:none;stroke:url(#dg);stroke-width:11;stroke-linecap:round;transition:stroke-dashoffset .5s cubic-bezier(.2,.7,.2,1);filter:drop-shadow(0 0 6px rgba(0,191,255,.6))}
+.dial .temp{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:1px;font-size:2.7rem;font-weight:700;line-height:1}
+.dial .temp sup{font-size:1.1rem;font-weight:500;color:var(--muted);align-self:center;top:0}
+.temp-btns{display:flex;justify-content:center;gap:14px;margin-top:6px}
+.temp-btns button{width:42px;height:42px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:#fff;font-size:1.3rem;cursor:pointer;transition:.18s;display:grid;place-items:center}
+.temp-btns button:hover{background:rgba(0,191,255,.18);border-color:var(--cyan);transform:translateY(-2px)}
+
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.tile{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:16px;padding:14px;cursor:pointer;transition:.22s;text-align:left}
+.tile:hover{border-color:var(--cyan);transform:translateY(-2px)}
+.tile .row{display:flex;align-items:center;justify-content:space-between}
+.tile .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:rgba(127,217,255,.1);color:var(--muted);transition:.22s}
+.tile .ic svg{width:18px;height:18px}
+.tile.on .ic{background:rgba(0,191,255,.2);color:var(--cyan);box-shadow:0 0 16px rgba(0,191,255,.4)}
+.tile h5{font-size:.92rem;font-weight:600;margin-top:12px}
+.tile .st{font-size:.72rem;color:var(--muted-2);font-weight:600;letter-spacing:.05em}
+.tile.on .st{color:var(--cyan-soft)}
+/* tile ancho completo (Aspiradora): layout horizontal */
+.tile.full{grid-column:1/-1;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:12px 16px}
+.tile.full h5{margin:0}
+.tile.full .txt{display:flex;flex-direction:column}
+.knob{width:38px;height:22px;border-radius:999px;background:rgba(127,217,255,.15);position:relative;transition:.22s}
+.knob::after{content:"";position:absolute;width:16px;height:16px;border-radius:50%;background:#fff;top:3px;left:3px;transition:.22s}
+.tile.on .knob{background:var(--cyan)}
+.tile.on .knob::after{left:19px}
+
+.scenes-lbl{font-size:.66rem;letter-spacing:.16em;color:var(--muted-2);font-weight:600;margin-bottom:9px}
+.scene-btns{display:flex;gap:9px}
+.scene-btns button{flex:1;padding:11px 6px;border-radius:13px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--muted);font-family:inherit;font-weight:600;font-size:.78rem;cursor:pointer;transition:.2s}
+.scene-btns button.active{background:#fff;color:#0a1030;border-color:#fff}
+.scene-btns button:not(.active):hover{border-color:var(--cyan);color:#fff}
+
+.sim-copy h3{font-size:clamp(1.5rem,3vw,2rem);font-weight:700;line-height:1.18;margin-bottom:16px}
+.sim-copy p{color:var(--muted);margin-bottom:22px}
+.sim-feat{display:flex;flex-direction:column;gap:14px;margin-bottom:26px}
+.sim-feat li{display:flex;gap:12px;align-items:flex-start;list-style:none}
+.sim-feat .ck{flex:none;width:26px;height:26px;border-radius:8px;background:rgba(0,191,255,.15);color:var(--cyan);display:grid;place-items:center}
+.sim-feat .ck svg{width:15px;height:15px}
+.sim-feat b{font-weight:600;color:#fff}
+.sim-feat small{color:var(--muted-2);display:block;font-size:.84rem}
+
+/* ---------- Services grid ---------- */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.svc{position:relative;background:var(--glass);border:1px solid var(--line);border-radius:var(--radius);padding:28px 24px;overflow:hidden;transition:.3s}
+.svc::before{content:"";position:absolute;inset:0;background:radial-gradient(120px 120px at var(--mx,50%) var(--my,0%),rgba(0,191,255,.16),transparent 70%);opacity:0;transition:opacity .3s}
+.svc:hover{border-color:rgba(0,191,255,.4);transform:translateY(-4px)}
+.svc:hover::before{opacity:1}
+.svc .ic{width:56px;height:56px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(0,191,255,.16),rgba(27,79,156,.18));border:1px solid var(--line);color:var(--cyan);margin-bottom:18px;transition:.3s}
+.svc:hover .ic{box-shadow:0 0 26px rgba(0,191,255,.45);transform:scale(1.05)}
+.svc .ic svg{width:28px;height:28px}
+.svc h3{font-size:1.15rem;font-weight:600;margin-bottom:8px}
+.svc p{color:var(--muted);font-size:.94rem}
+.svc .badge{position:absolute;top:18px;right:18px;font-size:.64rem;font-weight:700;letter-spacing:.08em;color:var(--cyan);background:rgba(0,191,255,.12);border:1px solid var(--line);padding:4px 9px;border-radius:999px}
+.svc.wide{grid-column:span 3;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+  background:linear-gradient(120deg,rgba(0,191,255,.08),rgba(27,79,156,.12))}
+.svc.wide .txt{display:flex;align-items:center;gap:20px}
+.svc.wide h3{margin:0}
+.svc.wide p{margin-top:4px}
+
+/* ---------- Escenas ---------- */
+.scenes-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.scene-c{position:relative;border-radius:var(--radius);padding:26px 22px;min-height:210px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;border:1px solid var(--line);transition:.3s}
+.scene-c:hover{transform:translateY(-5px)}
+.scene-c .glow{position:absolute;inset:0;opacity:.55;transition:.3s}
+.scene-c:hover .glow{opacity:.8}
+.scene-c .emo{position:absolute;top:20px;left:22px;font-size:1.7rem;filter:drop-shadow(0 4px 12px rgba(0,0,0,.4))}
+.scene-c h4{font-size:1.2rem;font-weight:700;position:relative}
+.scene-c p{font-size:.86rem;color:var(--muted);position:relative;margin-top:4px}
+.s-morning .glow{background:radial-gradient(circle at 70% 20%,rgba(255,179,71,.4),transparent 60%)}
+.s-leave .glow{background:radial-gradient(circle at 70% 20%,rgba(0,191,255,.4),transparent 60%)}
+.s-cinema .glow{background:radial-gradient(circle at 70% 20%,rgba(168,85,247,.4),transparent 60%)}
+.s-night .glow{background:radial-gradient(circle at 70% 20%,rgba(27,79,156,.55),transparent 60%)}
+
+/* ---------- Clima / why ---------- */
+.why{background:linear-gradient(120deg,rgba(27,79,156,.18),rgba(0,191,255,.06));border:1px solid var(--line);border-radius:28px;padding:54px 46px;
+  display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.why h2{font-size:clamp(1.8rem,3.6vw,2.6rem);font-weight:800;letter-spacing:-.02em;margin-bottom:18px;line-height:1.1}
+.why p{color:var(--muted);margin-bottom:14px}
+.why .stats{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.stat{background:rgba(7,13,34,.4);border:1px solid var(--line);border-radius:16px;padding:20px}
+.stat .n{font-size:1.9rem;font-weight:800;background:linear-gradient(120deg,var(--cyan-bright),var(--cyan-soft));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .t{font-size:.84rem;color:var(--muted)}
+
+/* ---------- Proceso ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:step}
+.step{position:relative;background:var(--glass);border:1px solid var(--line);border-radius:var(--radius);padding:26px 22px;transition:.3s}
+.step:hover{border-color:rgba(0,191,255,.4);transform:translateY(-4px)}
+.step .num{counter-increment:step;font-size:.9rem;font-weight:700;color:#0a1030;width:38px;height:38px;border-radius:12px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--cyan-bright),var(--cyan));margin-bottom:16px}
+.step .num::before{content:"0" counter(step)}
+.step h4{font-size:1.05rem;font-weight:600;margin-bottom:7px}
+.step p{color:var(--muted);font-size:.9rem}
+
+/* ---------- Nosotros ---------- */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.about-card{background:var(--glass);border:1px solid var(--line);border-radius:24px;padding:36px;position:relative;overflow:hidden}
+.about-card .badge-local{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;color:var(--cyan-soft);background:rgba(0,191,255,.1);border:1px solid var(--line);padding:7px 14px;border-radius:999px;margin-bottom:20px}
+.about h2{font-size:clamp(1.8rem,3.6vw,2.5rem);font-weight:800;margin-bottom:18px;letter-spacing:-.02em;line-height:1.12}
+.about p{color:var(--muted);margin-bottom:14px}
+.about .feats{display:flex;flex-direction:column;gap:12px;margin-top:20px}
+.about .feats div{display:flex;gap:11px;align-items:center;font-size:.95rem}
+.about .feats svg{width:20px;height:20px;color:var(--cyan);flex:none}
+
+/* ---------- Showroom ---------- */
+.demo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.demo{position:relative;aspect-ratio:9/13;border-radius:var(--radius);overflow:hidden;border:1px dashed rgba(127,217,255,.3);
+  background:linear-gradient(160deg,rgba(20,34,85,.6),rgba(7,13,34,.6));display:grid;place-items:center;text-align:center;padding:20px;transition:.3s}
+.demo:hover{border-color:var(--cyan)}
+.demo.tall{grid-row:span 1}
+.demo .ph{color:var(--muted-2)}
+.demo .play{width:62px;height:62px;border-radius:50%;background:rgba(0,191,255,.16);border:1px solid var(--line);display:grid;place-items:center;margin:0 auto 14px;color:var(--cyan)}
+.demo .play svg{width:24px;height:24px;margin-left:3px}
+.demo small{font-size:.78rem;color:var(--muted-2);display:block;margin-top:6px}
+
+/* ---------- CTA final ---------- */
+.cta-final{text-align:center;background:linear-gradient(135deg,rgba(0,191,255,.12),rgba(27,79,156,.2));border:1px solid var(--line);border-radius:30px;padding:64px 32px;position:relative;overflow:hidden}
+.cta-final::before{content:"";position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(0,191,255,.3),transparent 70%);top:-180px;left:50%;transform:translateX(-50%);filter:blur(20px)}
+.cta-final h2{font-size:clamp(2rem,4.4vw,3rem);font-weight:800;letter-spacing:-.02em;margin-bottom:16px;position:relative}
+.cta-final p{color:var(--muted);max-width:48ch;margin:0 auto 30px;position:relative}
+.cta-final .btn{position:relative}
+
+/* ---------- Footer ---------- */
+footer{border-top:1px solid var(--line);padding:56px 0 30px;margin-top:90px;background:rgba(7,13,34,.5)}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;margin-bottom:40px}
+footer .brand img{height:48px;filter:drop-shadow(0 0 14px rgba(0,191,255,.35))}
+footer p{color:var(--muted);font-size:.92rem;margin-top:14px;max-width:36ch}
+.foot-col h5{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2);margin-bottom:16px}
+.foot-col a,.foot-col span{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:.94rem;margin-bottom:12px;transition:.2s}
+.foot-col a:hover{color:var(--cyan)}
+.foot-col svg{width:17px;height:17px;color:var(--cyan)}
+.foot-bottom{border-top:1px solid var(--line);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--muted-2);font-size:.82rem}
+
+/* ---------- Floating WhatsApp ---------- */
+.wa-float{position:fixed;bottom:24px;right:24px;z-index:60;width:62px;height:62px;border-radius:50%;
+  background:linear-gradient(135deg,#2bd96f,#179e4b);display:grid;place-items:center;
+  box-shadow:0 10px 30px rgba(37,211,102,.45);animation:wapulse 2.6s infinite;transition:transform .2s}
+.wa-float:hover{transform:scale(1.08)}
+.wa-float svg{width:34px;height:34px;color:#fff}
+@keyframes wapulse{0%{box-shadow:0 10px 30px rgba(37,211,102,.45),0 0 0 0 rgba(37,211,102,.5)}70%{box-shadow:0 10px 30px rgba(37,211,102,.45),0 0 0 18px rgba(37,211,102,0)}100%{box-shadow:0 10px 30px rgba(37,211,102,.45),0 0 0 0 rgba(37,211,102,0)}}
+
+/* ---------- Reveal animation ---------- */
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}.reveal.d5{transition-delay:.4s}
+
+/* ---------- Mobile ---------- */
+@media(max-width:980px){
+  .hero-grid,.sim-grid,.why,.about{grid-template-columns:1fr}
+  .hero-grid{gap:36px}
+  .hero-text{text-align:center}
+  .lead{margin-left:auto;margin-right:auto}
+  .hero-cta{justify-content:center}
+  .hero-visual{min-height:340px;order:-1}
+  .svc-grid,.demo-grid{grid-template-columns:1fr 1fr}
+  .scenes-row{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .svc.wide{grid-column:span 2}
+  .why{padding:38px 26px}
+  .sim-grid{gap:18px}
+  /* La foto queda fija arriba mientras tocás los controles abajo */
+  .room{min-height:0;aspect-ratio:16/10;position:sticky;top:60px;z-index:5;
+        box-shadow:0 14px 36px rgba(0,0,0,.6)}
+  .phone{margin-top:8px}
+  .about{gap:30px}
+}
+@media(max-width:640px){
+  :root{--radius:16px}
+  .wrap{padding:0 18px}
+  .nav-links{display:none}
+  .nav-links.open{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:rgba(8,14,36,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:10px 18px 18px}
+  .nav-links.open a{padding:14px 0;border-bottom:1px solid var(--line);width:100%;font-size:1rem;color:var(--ink)}
+  .nav-links.open a::after{display:none}
+  .menu-toggle{display:block}
+  .nav .btn-wa{display:none}
+  header.nav{padding:10px 0}
+  .brand img{height:40px}
+
+  .sec{padding:58px 0}
+  .sec-head{margin-bottom:38px}
+  .hero{padding:96px 0 40px;min-height:auto}
+  h1{font-size:clamp(2rem,8.5vw,2.7rem)}
+  .lead{font-size:1rem}
+  .hl{white-space:normal}
+  .hero-cta{flex-direction:column}
+  .hero-cta .btn{width:100%;justify-content:center}
+  /* Hero mobile: logo fijo + íconos orbitando, escalados */
+  .hero-visual{min-height:360px;margin-top:6px}
+  .hero-ring{width:264px;height:264px;margin:-132px}
+  .hero-ring2.mid{width:188px;height:188px;margin:-94px}
+  .hero-logo-emblem{width:128px}
+  .orb{width:300px;height:300px}
+  .orbit{--r:132px;animation-duration:30s}
+  .node-ic{animation-duration:30s}
+  .node{width:44px;height:44px;margin:-22px}
+  .node-ic svg{width:19px;height:19px}
+
+  .svc-grid,.demo-grid,.scenes-row,.steps{grid-template-columns:1fr}
+  .svc.wide{grid-column:span 1;text-align:center;justify-content:center;flex-direction:column}
+  .svc.wide .txt{flex-direction:column;text-align:center}
+  .svc.wide .btn{width:100%;justify-content:center}
+
+  .why{padding:30px 20px;border-radius:20px}
+  .why .stats{grid-template-columns:1fr 1fr;gap:12px}
+  .stat{padding:16px}
+  .stat .n{font-size:1.5rem}
+
+  .about-card{padding:26px 22px}
+  .cta-final{padding:46px 22px;border-radius:22px}
+  .cta-final .btn{width:100%;justify-content:center}
+
+  .foot-grid{grid-template-columns:1fr;gap:30px;text-align:center}
+  footer .brand,.foot-grid > div:first-child p{margin-left:auto;margin-right:auto}
+  footer .brand{justify-content:center}
+  .foot-col a,.foot-col span{justify-content:center}
+  .foot-bottom{justify-content:center;text-align:center}
+
+  .demo{aspect-ratio:16/10}
+  .wa-float{width:56px;height:56px;bottom:18px;right:18px}
+  .wa-float svg{width:30px;height:30px}
+}
+@media(max-width:400px){
+  .why .stats{grid-template-columns:1fr}
+  .phone{width:100%}
+  h1{font-size:1.85rem}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-fx"><div class="grid"></div></div>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand"><img src="logo-png.png" alt="Hogify — domótica en Río Gallegos" /></a>
+    <nav class="nav-links" id="navlinks">
+      <a href="#simulador">Probá la app</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#escenas">Escenas</a>
+      <a href="#proceso">Cómo trabajamos</a>
+      <a href="#nosotros">Nosotros</a>
+    </nav>
+    <a class="btn btn-wa" data-wa="Hola Hogify, quiero info sobre domótica para mi casa">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.738-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+      WhatsApp
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menú">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <span class="eyebrow reveal"><span class="dot"></span>Domótica en Río Gallegos</span>
+      <h1 class="reveal d1">Convertí tu casa en <span class="hl" id="hl1">inteligente</span>, controlá <span class="grad">todo</span> desde el <span class="hl" id="hl2">celular</span>.</h1>
+      <p class="lead reveal d2">Climatización, luces, seguridad y accesos integrados en un solo sistema. Llegás a tu casa ya climatizada, la mirás desde donde estés y la manejás con un toque. Instalación e integración profesional, acá en Río Gallegos.</p>
+      <div class="hero-cta reveal d3">
+        <a class="btn btn-primary" data-wa="Hola Hogify, quiero info sobre domótica para mi casa">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.738-.981z"/></svg>
+          Pedí tu cotización
+        </a>
+        <a class="btn btn-ghost" href="#simulador">Probá la app interactiva ↓</a>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal d2">
+      <div class="orb"></div>
+      <div class="hero-ring"></div>
+      <div class="hero-ring2 mid"></div>
+      <!-- Íconos que orbitan alrededor del logo -->
+      <div class="orbit">
+        <span class="node" style="--a:0deg"><span class="node-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 14.76V3.5a2.5 2.5 0 00-5 0v11.26a4.5 4.5 0 105 0z"/></svg></span></span>
+        <span class="node" style="--a:60deg"><span class="node-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 00-4 12.7V17h8v-2.3A7 7 0 0012 2z"/></svg></span></span>
+        <span class="node" style="--a:120deg"><span class="node-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></span></span>
+        <span class="node" style="--a:180deg"><span class="node-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></span></span>
+        <span class="node" style="--a:240deg"><span class="node-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M4 8h16M4 13h16M4 18h16"/></svg></span></span>
+        <span class="node" style="--a:300deg"><span class="node-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg></span></span>
+      </div>
+      <div class="hero-core"><img class="hero-logo-emblem" src="logo-png.png" alt="" /></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SIMULADOR ============ -->
+<section class="sec sim" id="simulador">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Simulador interactivo</span>
+      <h2>Tu hogar en <span class="grad">tus manos</span></h2>
+      <p>Así se siente controlar tu casa con Hogify. Movés la temperatura, prendés las luces, cambiás de escena — y todo responde al instante. Probalo:</p>
+    </div>
+
+    <div class="sim-grid">
+      <div class="room reveal" id="room">
+        <img src="luzprendida.jpeg" alt="Living inteligente Hogify" id="roomImg" />
+        <div class="tint" id="roomTint"></div>
+        <div class="pills">
+          <span class="pill" id="pillTemp">TEMP: 23°C</span>
+          <span class="pill" id="pillMode">MODO: RELAX</span>
+          <span class="pill" id="pillLights">LUCES: OFF</span>
+        </div>
+        <div class="scene-label" id="sceneLabel">🌅 Buen ambiente</div>
+      </div>
+
+      <div class="phone reveal d2">
+        <div class="notch"><span class="led"></span></div>
+        <div class="ph-head">
+          <div>
+            <h4>Living</h4>
+            <small id="phStatus">Activo · 23°C</small>
+          </div>
+          <span class="status"><span class="d"></span>En línea</span>
+        </div>
+
+        <div class="dial-card">
+          <div class="lbl">TEMPERATURA</div>
+          <div class="dial">
+            <svg viewBox="0 0 120 120">
+              <defs><linearGradient id="dg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1FB6FF"/><stop offset="1" stop-color="#7fd9ff"/></linearGradient></defs>
+              <circle class="track" cx="60" cy="60" r="50"/>
+              <circle class="prog" id="dialProg" cx="60" cy="60" r="50" stroke-dasharray="314" stroke-dashoffset="120"/>
+            </svg>
+            <div class="temp"><span id="tempVal">23</span><sup>°C</sup></div>
+          </div>
+          <div class="temp-btns">
+            <button id="tDown" aria-label="Bajar temperatura">−</button>
+            <button id="tUp" aria-label="Subir temperatura">+</button>
+          </div>
+        </div>
+
+        <div class="tiles">
+          <div class="tile" id="tileLights">
+            <div class="row">
+              <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 00-4 12.7V17h8v-2.3A7 7 0 0012 2z"/></svg></div>
+              <div class="knob"></div>
+            </div>
+            <h5>Luces</h5><span class="st" id="stLights">OFF</span>
+          </div>
+          <div class="tile on" id="tileBlinds">
+            <div class="row">
+              <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M4 8h16M4 13h16M4 18h16"/></svg></div>
+              <div class="knob"></div>
+            </div>
+            <h5>Persianas</h5><span class="st" id="stBlinds">ABIERTAS</span>
+          </div>
+          <div class="tile full" id="tileVacuum">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="13" r="8"/><circle cx="12" cy="13" r="3"/><path d="M12 5V2M5 13H2m20 0h-3"/></svg></div>
+            <div class="txt"><h5>Aspiradora</h5><span class="st" id="stVacuum">EN BASE</span></div>
+            <div class="knob"></div>
+          </div>
+        </div>
+
+        <div class="scenes-lbl">ESCENAS</div>
+        <div class="scene-btns" id="sceneBtns">
+          <button class="active" data-scene="relax">Relax</button>
+          <button data-scene="cinema">Cine</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICIOS ============ -->
+<section class="sec" id="servicios">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Servicios</span>
+      <h2>Todo lo que se puede <span class="grad">conectar</span>, lo hacemos inteligente</h2>
+      <p>Seis pilares para arrancar — y todo lo que se te ocurra después. Integramos cada parte en un solo sistema que manejás desde el celular.</p>
+    </div>
+
+    <div class="svc-grid">
+      <article class="svc reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 00-4 12.7V17h8v-2.3A7 7 0 0012 2z"/></svg></div>
+        <h3>Iluminación inteligente</h3>
+        <p>Encendé, regulá y programá las luces por ambiente. Escenas y rutinas para cada momento del día.</p>
+      </article>
+
+      <article class="svc reveal d1">
+        <span class="badge">★ El más pedido acá</span>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 14.76V3.5a2.5 2.5 0 00-5 0v11.26a4.5 4.5 0 105 0z"/></svg></div>
+        <h3>Climatización y calefacción</h3>
+        <p>Termostatos por ambiente. Programá la temperatura y llegá a tu casa ya climatizada — ideal para el frío de Río Gallegos.</p>
+      </article>
+
+      <article class="svc reveal d2">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+        <h3>Seguridad</h3>
+        <p>Cámaras, sensores y alarmas. Mirá tu casa desde el celular y recibí avisos al instante ante cualquier movimiento.</p>
+      </article>
+
+      <article class="svc reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+        <h3>Cerraduras y accesos</h3>
+        <p>Abrí la puerta sin llaves, dale acceso a quien quieras y controlá quién entra y sale, estés donde estés.</p>
+      </article>
+
+      <article class="svc reveal d1">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M4 8h16M4 13h16M4 18h16"/></svg></div>
+        <h3>Cortinas y persianas</h3>
+        <p>Subí y bajá los cortinados automáticamente según la hora o la luz. Comodidad y privacidad con un toque.</p>
+      </article>
+
+      <article class="svc reveal d2">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg></div>
+        <h3>Enchufes y consumo</h3>
+        <p>Encendé electrodomésticos a distancia y medí cuánta energía gasta cada cosa. Más control, menos factura.</p>
+      </article>
+
+      <article class="svc wide reveal d3">
+        <div class="txt">
+          <div class="ic" style="margin:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 10v6m11-11h-6M7 12H1m15.5-7.5l-4 4m-3 3l-4 4m11 0l-4-4m-3-3l-4-4"/></svg></div>
+          <div>
+            <h3>Soluciones a medida</h3>
+            <p>Riego automático, portones, control de piscina, multimedia… Si se puede conectar, lo integramos a tu sistema.</p>
+          </div>
+        </div>
+        <a class="btn btn-primary" data-wa="Hola Hogify, tengo una idea a medida que quiero integrar">Contanos tu idea</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ESCENAS ============ -->
+<section class="sec" id="escenas">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Escenas y rutinas</span>
+      <h2>No vendemos aparatos. Vendemos <span class="grad">momentos</span></h2>
+      <p>Con un solo toque (o un comando de voz), tu casa entera se acomoda a lo que estás haciendo. Esto es lo que hace la diferencia.</p>
+    </div>
+
+    <div class="scenes-row">
+      <div class="scene-c s-morning reveal"><div class="glow"></div><span class="emo">🌅</span><h4>Buenos Días</h4><p>Suben las persianas, arranca la calefacción y se prenden las luces de a poco.</p></div>
+      <div class="scene-c s-leave reveal d1"><div class="glow"></div><span class="emo">🚪</span><h4>Me Voy</h4><p>Se apaga todo, baja la temperatura y se activa la seguridad. Sin pensar en nada.</p></div>
+      <div class="scene-c s-cinema reveal d2"><div class="glow"></div><span class="emo">🎬</span><h4>Modo Cine</h4><p>Bajan las luces, se cierran las cortinas y el ambiente queda listo para ver una peli.</p></div>
+      <div class="scene-c s-night reveal d3"><div class="glow"></div><span class="emo">🌙</span><h4>Buenas Noches</h4><p>Todo se apaga, se cierra la casa y queda a temperatura ideal para dormir.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ POR QUÉ RÍO GALLEGOS ============ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="why reveal">
+      <div>
+        <span class="sec-tag">Pensado para acá</span>
+        <h2>Hecha para el frío de <span class="grad">la Patagonia</span></h2>
+        <p>Acá el frío y el viento no son un detalle. Una casa que arranca la calefacción antes de que llegues, mantiene la temperatura justa y cuida el consumo de gas no es un lujo: se nota todos los días.</p>
+        <p>Conocemos las casas y el clima de la zona. Cada proyecto lo armamos para lo que de verdad se necesita acá, no para una casa cualquiera.</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="n">Calefacción</div><div class="t">Programada para que llegues a una casa tibia</div></div>
+        <div class="stat"><div class="n">Consumo</div><div class="t">Controlá el gasto de gas y energía en invierno</div></div>
+        <div class="stat"><div class="n">Una app</div><div class="t">Todo el hogar desde el celular, estés donde estés</div></div>
+        <div class="stat"><div class="n">A tu ritmo</div><div class="t">Empezá por lo que más necesitás y sumá después</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESO ============ -->
+<section class="sec" id="proceso">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Cómo trabajamos</span>
+      <h2>De la idea a la casa <span class="grad">funcionando</span></h2>
+      <p>Un proceso claro, sin sorpresas. Te acompañamos desde la primera charla hasta mucho después de la instalación.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><div class="num"></div><h4>Asesoramiento</h4><p>Charlamos qué necesitás, qué casa tenés y por dónde conviene empezar. Sin compromiso.</p></div>
+      <div class="step reveal d1"><div class="num"></div><h4>Proyecto a medida</h4><p>Diseñamos la solución para tu casa y tu presupuesto. Cotización clara y personalizada.</p></div>
+      <div class="step reveal d2"><div class="num"></div><h4>Instalación</h4><p>Vamos a tu casa, instalamos e integramos todo en un sistema que funciona desde el día uno.</p></div>
+      <div class="step reveal d3"><div class="num"></div><h4>Postventa</h4><p>Te dejamos todo andando y seguimos cerca para ajustes, dudas o sumar cosas más adelante.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NOSOTROS ============ -->
+<section class="sec" id="nosotros">
+  <div class="wrap about">
+    <div class="reveal">
+      <span class="badge-local"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Río Gallegos, Santa Cruz</span>
+      <h2>Un negocio <span class="grad">de acá</span>, hecho a mano</h2>
+      <p>Hogify es un negocio familiar de Río Gallegos. Somos los que vamos a tu casa, instalamos, integramos y nos quedamos para que todo funcione como tiene que funcionar.</p>
+      <p>No revendemos cajas: armamos sistemas. Probamos cada cosa en nuestra propia casa antes de ofrecerla, así que lo que te instalamos ya lo vivimos nosotros.</p>
+      <div class="feats">
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Asesoramiento real, no venta de catálogo</div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Integración completa de punta a punta</div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Cerca tuyo, antes y después de la obra</div>
+      </div>
+    </div>
+    <div class="about-card reveal d2">
+      <div class="orb" style="position:absolute;top:-40px;right:-40px;width:200px;height:200px"></div>
+      <h2 style="font-size:1.5rem;position:relative">"Si se puede conectar, lo hacemos inteligente."</h2>
+      <p style="position:relative">Esa es la idea. Empezás por donde quieras —las luces, la calefacción, la seguridad— y vas sumando. Tu casa crece con vos, a tu ritmo.</p>
+      <a class="btn btn-primary" data-wa="Hola Hogify, quiero que me asesoren para empezar mi casa inteligente" style="position:relative;margin-top:10px">Hablemos de tu casa</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEMO / SHOWROOM ============ -->
+<section class="sec" id="demo">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Demo real</span>
+      <h2>Probado en una casa <span class="grad">de verdad</span></h2>
+      <p>Nuestra propia casa es el showroom. Acá vas a ver las instalaciones funcionando.</p>
+    </div>
+    <!-- PLACEHOLDERS: reemplazar por videos/fotos reales del showroom -->
+    <div class="demo-grid">
+      <div class="demo reveal"><div class="ph"><div class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3l14 9-14 9V3z"/></svg></div>Video: escena "Buenos Días"<small>Reemplazar por video real</small></div></div>
+      <div class="demo reveal d1"><div class="ph"><div class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3l14 9-14 9V3z"/></svg></div>Video: control de clima<small>Reemplazar por video real</small></div></div>
+      <div class="demo reveal d2"><div class="ph"><div class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3l14 9-14 9V3z"/></svg></div>Foto: instalación de luces<small>Reemplazar por foto real</small></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="cta-final reveal">
+      <h2>¿Listo para que tu casa <span class="grad">piense por vos</span>?</h2>
+      <p>Contanos qué tenés en mente. Te asesoramos sin compromiso y armamos una cotización a medida para tu casa en Río Gallegos.</p>
+      <a class="btn btn-wa" data-wa="Hola Hogify, quiero pedir una cotización para domotizar mi casa" style="font-size:1.05rem;padding:16px 30px">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.738-.981z"/></svg>
+        Escribinos por WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#top" class="brand"><img src="logo-png.png" alt="Hogify" /></a>
+        <p>Domótica y casas inteligentes en Río Gallegos. Si se puede conectar, lo hacemos inteligente.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Navegá</h5>
+        <a href="#simulador">Probá la app</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#escenas">Escenas</a>
+        <a href="#proceso">Cómo trabajamos</a>
+        <a href="#nosotros">Nosotros</a>
+      </div>
+      <div class="foot-col">
+        <h5>Contacto</h5>
+        <a data-wa="Hola Hogify, quiero más información"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.738-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>+54 9 2966 53-2800</a>
+        <!-- PLACEHOLDER: reemplazar por el Instagram real -->
+        <a href="#" id="igLink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>@hogify</a>
+        <a href="mailto:hogify_clientes@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg>hogify_clientes@gmail.com</a>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Río Gallegos, Santa Cruz</span>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> Hogify · Domótica en Río Gallegos</span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" data-wa="Hola Hogify, quiero info sobre domótica para mi casa" aria-label="Escribinos por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.738-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+</a>
+
+<script>
+// ===== CONFIG (editar acá) =====
+const WHATSAPP = "5492966532800";
+const INSTAGRAM = "https://instagram.com/hogify"; // PLACEHOLDER: confirmar handle real
+
+// ---- WhatsApp links ----
+document.querySelectorAll("[data-wa]").forEach(el=>{
+  const msg = encodeURIComponent(el.getAttribute("data-wa"));
+  el.setAttribute("href", `https://wa.me/${WHATSAPP}?text=${msg}`);
+  el.setAttribute("target","_blank");
+  el.setAttribute("rel","noopener");
+});
+const ig = document.getElementById("igLink"); if(ig) ig.href = INSTAGRAM;
+document.getElementById("year").textContent = new Date().getFullYear();
+
+// ---- Nav scroll state + mobile menu ----
+const nav = document.getElementById("nav");
+addEventListener("scroll",()=>nav.classList.toggle("scrolled", scrollY>30));
+const menuToggle = document.getElementById("menuToggle");
+const navlinks = document.getElementById("navlinks");
+menuToggle.addEventListener("click",()=>navlinks.classList.toggle("open"));
+navlinks.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>navlinks.classList.remove("open")));
+
+// ---- Reveal on scroll (con fallback: nunca deja contenido oculto) ----
+const revealAll = ()=>document.querySelectorAll(".reveal").forEach(el=>el.classList.add("in"));
+if("IntersectionObserver" in window){
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target);} });
+  },{threshold:0, rootMargin:"0px 0px -8% 0px"});
+  document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+  // Red de seguridad: si algo quedó sin mostrarse, lo revelamos.
+  setTimeout(()=>document.querySelectorAll(".reveal:not(.in)").forEach(el=>{
+    if(el.getBoundingClientRect().top < innerHeight) el.classList.add("in");
+  }),1200);
+}else{
+  revealAll();
+}
+
+// ---- Hero keyword highlight ----
+addEventListener("load",()=>{
+  setTimeout(()=>document.getElementById("hl1").classList.add("lit"),650);
+  setTimeout(()=>document.getElementById("hl2").classList.add("lit"),1050);
+});
+
+// ---- Services cursor glow ----
+document.querySelectorAll(".svc").forEach(card=>{
+  card.addEventListener("mousemove",e=>{
+    const r = card.getBoundingClientRect();
+    card.style.setProperty("--mx",(e.clientX-r.left)+"px");
+    card.style.setProperty("--my",(e.clientY-r.top)+"px");
+  });
+});
+
+// ===== INTERACTIVE SIMULATOR =====
+// Fotos reales del showroom. Editá los nombres acá si cambian.
+const IMG = {
+  on:"luzprendida.jpeg",        // luces encendidas (living normal)
+  off:"luzapagada.JPG",         // luces apagadas
+  cinema:"cine.jpeg",           // escena cine
+  blindsOpen:"persiana-abierta.jpeg",   // persianas abiertas (vista nocturna)
+  blindsClosed:"persiana-cerrada.jpeg", // persianas cerradas
+  vacOn:"aspiradora-andando.jpeg",      // aspiradora andando
+  vacBase:"aspiradora-base.jpeg",       // aspiradora en su base
+};
+// Precarga para que el cambio sea instantáneo
+Object.values(IMG).forEach(s=>{ const i=new Image(); i.src=s; });
+
+// focus = el último control que tocaste; define qué foto se muestra.
+const state = { temp:23, lights:true, blinds:true, vacuum:false, scene:"relax", focus:"scene" };
+const TEMP_MIN=16, TEMP_MAX=28;
+const C = 2*Math.PI*50; // dial circumference ~314
+
+const dialProg = document.getElementById("dialProg");
+const tempVal = document.getElementById("tempVal");
+const phStatus = document.getElementById("phStatus");
+const pillTemp = document.getElementById("pillTemp");
+const pillMode = document.getElementById("pillMode");
+const pillLights = document.getElementById("pillLights");
+const sceneLabel = document.getElementById("sceneLabel");
+const room = document.getElementById("room");
+const roomImg = document.getElementById("roomImg");
+const roomTint = document.getElementById("roomTint");
+const tileLights = document.getElementById("tileLights");
+const tileBlinds = document.getElementById("tileBlinds");
+const tileVacuum = document.getElementById("tileVacuum");
+const stLights = document.getElementById("stLights");
+const stBlinds = document.getElementById("stBlinds");
+const stVacuum = document.getElementById("stVacuum");
+
+const SCENES = {
+  relax:  {label:"🌅 Relax",    mode:"RELAX",  tint:"linear-gradient(135deg,rgba(255,170,80,.7),rgba(0,191,255,.2))", temp:23},
+  cinema: {label:"🎬 Modo Cine", mode:"CINEMA", tint:"linear-gradient(135deg,rgba(27,79,156,.6),rgba(0,0,0,.5))",    temp:21},
+};
+
+// La foto refleja el último control tocado
+function roomImageSrc(){
+  switch(state.focus){
+    case "lights": return state.lights ? IMG.on : IMG.off;
+    case "blinds": return state.blinds ? IMG.blindsOpen : IMG.blindsClosed;
+    case "vacuum": return state.vacuum ? IMG.vacOn : IMG.vacBase;
+    default: // escena
+      if(state.scene==="cinema") return IMG.cinema;
+      return state.lights ? IMG.on : IMG.off;
+  }
+}
+function swapRoomImage(){
+  const src = roomImageSrc();
+  if(roomImg.getAttribute("src") === src) return;
+  roomImg.classList.add("swapping");
+  setTimeout(()=>{ roomImg.src = src; }, 160);
+}
+roomImg.addEventListener("load",()=>roomImg.classList.remove("swapping"));
+
+function render(){
+  // dial
+  const pct = (state.temp - TEMP_MIN)/(TEMP_MAX - TEMP_MIN);
+  dialProg.style.strokeDashoffset = C - pct*C;
+  tempVal.textContent = state.temp;
+  phStatus.textContent = `Activo · ${state.temp}°C`;
+  pillTemp.textContent = `TEMP: ${state.temp}°C`;
+  // luces
+  stLights.textContent = state.lights ? "ON" : "OFF";
+  pillLights.textContent = `LUCES: ${state.lights?"ON":"OFF"}`;
+  tileLights.classList.toggle("on", state.lights);
+  // persianas
+  stBlinds.textContent = state.blinds ? "ABIERTAS" : "CERRADAS";
+  tileBlinds.classList.toggle("on", state.blinds);
+  // aspiradora
+  stVacuum.textContent = state.vacuum ? "ASPIRANDO" : "EN BASE";
+  tileVacuum.classList.toggle("on", state.vacuum);
+  // escena
+  const s = SCENES[state.scene];
+  pillMode.textContent = `MODO: ${s.mode}`;
+  sceneLabel.textContent = s.label;
+  roomTint.style.background = s.tint;
+  // foto real según el último control tocado
+  swapRoomImage();
+}
+
+document.getElementById("tUp").addEventListener("click",()=>{ state.temp=Math.min(TEMP_MAX,state.temp+1); render(); });
+document.getElementById("tDown").addEventListener("click",()=>{ state.temp=Math.max(TEMP_MIN,state.temp-1); render(); });
+tileLights.addEventListener("click",()=>{ state.lights=!state.lights; state.focus="lights"; render(); });
+tileBlinds.addEventListener("click",()=>{ state.blinds=!state.blinds; state.focus="blinds"; render(); });
+tileVacuum.addEventListener("click",()=>{ state.vacuum=!state.vacuum; state.focus="vacuum"; render(); });
+
+document.getElementById("sceneBtns").querySelectorAll("button").forEach(b=>{
+  b.addEventListener("click",()=>{
+    document.querySelectorAll("#sceneBtns button").forEach(x=>x.classList.remove("active"));
+    b.classList.add("active");
+    state.scene = b.dataset.scene;
+    state.focus = "scene";
+    state.temp = SCENES[state.scene].temp;
+    if(state.scene==="cinema"){ state.lights=false; state.blinds=false; }
+    if(state.scene==="relax"){ state.lights=true; state.blinds=true; }
+    render();
+  });
+});
+
+dialProg.style.strokeDasharray = C;
+render();
+</script>
+</body>
+</html>
